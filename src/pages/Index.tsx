@@ -267,7 +267,7 @@ const Index = () => {
           />
           <div className="mb-2 font-semibold text-black/70">Live Preview</div>
           <div className="flex justify-center mb-4">
-            <div className="p-4 bg-white rounded-2xl border-2 border-gray-100">
+            <div className="p-8 bg-white rounded-2xl border-2 border-gray-100">
               <div
                 ref={qrCodeRef}
                 className="flex items-center justify-center"
