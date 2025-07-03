@@ -212,7 +212,7 @@ const Index = () => {
         <div className="container mx-auto flex items-center justify-between py-3 px-4">
           <div className="flex items-center gap-3">
             <img src={logo} alt="Site Logo" className="h-10 w-auto rounded bg-black" />
-            <span className="text-2xl font-bold bg-gradient-to-r from-[#B6862C] to-[#FFD700] bg-clip-text text-transparent">
+            <span className="font-bold bg-gradient-to-r from-[#B6862C] to-[#FFD700] bg-clip-text text-transparent select-none text-xl md:text-2xl">
               UR9 QR-code generator
             </span>
           </div>
@@ -222,7 +222,7 @@ const Index = () => {
                 How it works
               </Button>
             </DialogTrigger>
-            <DialogContent>
+            <DialogContent className="px-2 md:px-6">
               <DialogHeader>
                 <DialogTitle>How it works</DialogTitle>
                 <DialogDescription>
@@ -240,26 +240,16 @@ const Index = () => {
         </div>
       </header>
       {/* Hero Section */}
-      <section className="pt-32 pb-10 text-center max-w-3xl mx-auto">
-        <h1 className="text-4xl md:text-5xl font-extrabold mb-4 bg-gradient-to-r from-[#B6862C] to-[#FFD700] bg-clip-text text-transparent">
+      <section className="pt-32 pb-10 text-center max-w-3xl mx-auto px-4">
+        <h1 className="text-3xl md:text-5xl font-extrabold mb-4 bg-gradient-to-r from-[#B6862C] to-[#FFD700] bg-clip-text text-transparent">
           Generate and Publish <span className="inline-block">QR Codes</span>.
         </h1>
         <p className="text-lg text-black/70 mb-6">
           Create beautiful, customizable QR codes with logos, colors, and styles. Powered by UR9 Creative Tech. Perfect for business cards, marketing materials, and digital content.
         </p>
-        {/* <div className="flex justify-center gap-4 mb-8">
-          <Button className="px-8 py-3 text-lg font-semibold bg-gradient-to-r from-[#B6862C] to-[#FFD700] text-white border-none">Get Started</Button>
-          <Button variant="outline" className="px-8 py-3 text-lg font-semibold border-2 border-primary text-primary bg-white">Watch demo</Button>
-        </div> */}
       </section>
       {/* Main QR Section */}
-      <main className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 px-4 pb-16">
-        {/* Left: Destination (only Website for now) */}
-        <aside className="bg-white rounded-lg border p-6 flex flex-col items-start min-h-[350px]">
-          <h2 className="text-lg font-bold mb-4 text-black/80">Destination</h2>
-          <Button className="w-full mb-2 bg-primary text-primary-foreground border-none">Website</Button>
-          {/* Future: Add more destinations here */}
-        </aside>
+      <main className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 px-4 pb-16">
         {/* Center: URL input and QR preview */}
         <section className="bg-white rounded-lg border p-6 flex flex-col items-center">
           <Label htmlFor="qr-content" className="mb-2 text-black/80">Enter your website URL</Label>
@@ -387,7 +377,7 @@ const Index = () => {
         </aside>
       </main>
       {/* Footer */}
-      <footer className="text-center mt-12 pt-8 border-t border-gray-200">
+      <footer className="text-center mt-12 pt-8 border-t border-gray-200 px-4">
         <p className="text-gray-500">
           From UR9 Creative Tech for UR9 Group
         </p>
