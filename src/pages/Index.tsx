@@ -42,6 +42,7 @@ const Index = () => {
   const [showBgColorPicker, setShowBgColorPicker] = useState(false);
   const [isGenerating, setIsGenerating] = useState(false);
   const [howItWorksOpen, setHowItWorksOpen] = useState(false);
+  const [exportResolution, setExportResolution] = useState(1);
 
   const qrCodeRef = useRef<HTMLDivElement>(null);
   const qrCodeInstance = useRef<QRCodeStyling | null>(null);
@@ -145,15 +146,19 @@ const Index = () => {
     setIsGenerating(true);
     try {
       const originalBg = qrBgColor;
+      const originalSize = qrSize;
       if (transparentExport) {
         qrCodeInstance.current.update({ backgroundOptions: { color: 'rgba(0,0,0,0)' } });
       }
+      // Set export resolution
+      qrCodeInstance.current.update({ width: qrSize * exportResolution, height: qrSize * exportResolution });
       await qrCodeInstance.current.download({
         name: `qrcode-${Date.now()}`,
         extension: format,
       });
-      if (transparentExport) {
-        qrCodeInstance.current.update({ backgroundOptions: { color: originalBg } });
+      // Restore background color and size if changed
+      if (transparentExport || exportResolution !== 1) {
+        qrCodeInstance.current.update({ backgroundOptions: { color: originalBg }, width: originalSize, height: originalSize });
       }
       toast.success(`QR Code exported as ${format.toUpperCase()}`);
     } catch (error) {
@@ -321,6 +326,18 @@ const Index = () => {
                 Export with transparent background
               </label>
             </div>
+            <div className="mb-4">
+              <label className="block text-black/80 font-bold mb-2">Export Resolution: {exportResolution}x</label>
+              <input
+                type="range"
+                min={1}
+                max={5}
+                step={1}
+                value={exportResolution}
+                onChange={e => setExportResolution(Number(e.target.value))}
+                className="w-full"
+              />
+            </div>
             <div className="flex gap-3">
               <Button
                 onClick={() => exportQrCode('png')}
@@ -362,7 +379,7 @@ const Index = () => {
             ))}
           </div>
           <h2 className="text-lg font-bold mb-4 text-black/80">Color</h2>
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-2 mb-6">
             {COLOR_PRESETS.map((color, index) => (
               <button
                 key={index}
@@ -373,6 +390,28 @@ const Index = () => {
                 style={{ backgroundColor: color }}
               />
             ))}
+          </div>
+          <h2 className="text-lg font-bold mb-4 text-black/80">Background</h2>
+          <div className="flex flex-wrap gap-2 mb-6">
+            {COLOR_PRESETS.map((color, index) => (
+              <button
+                key={index}
+                onClick={() => setQrBgColor(color)}
+                className={`w-8 h-8 rounded-full border-2 transition-transform hover:scale-110 ${
+                  qrBgColor === color ? 'border-accent scale-110' : 'border-gray-300'
+                }`}
+                style={{ backgroundColor: color }}
+              />
+            ))}
+          </div>
+          <div className="mb-6">
+            <label className="block text-black/80 font-bold mb-2">Custom Background</label>
+            <input
+              type="color"
+              value={qrBgColor}
+              onChange={e => setQrBgColor(e.target.value)}
+              className="w-10 h-10 p-0 border rounded"
+            />
           </div>
         </aside>
       </main>
