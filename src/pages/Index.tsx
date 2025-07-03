@@ -378,7 +378,7 @@ const Index = () => {
       </main>
       {/* Footer */}
       <footer className="text-center mt-12 pt-8 border-t border-gray-200 px-4">
-        <p className="text-gray-500">
+        <p className="text-gray-500 font-bold">
           From UR9 Creative Tech for UR9 Group
         </p>
       </footer>
